@@ -52,11 +52,11 @@ $(document).ready(function () {
       }
     }
   }
-
-  var allEvents = [];
-
+  var allEvents;
   // saves events in localstorage corresponding to time blocks
   function saveEvent() {
+    allEvents = JSON.parse(localStorage.getItem("schedule"));
+    console.log(allEvents);
     var replaced = false;
 
     // based on user button click
@@ -66,7 +66,8 @@ $(document).ready(function () {
     };
 
     // if there are no saved events, add event details to the array
-    if (allEvents.length === 0) {
+    if (allEvents === null) {
+      allEvents = [];
       allEvents.push(eventDetails);
     } else {
       // otherwise, check for existing events with the same time block and replace them
@@ -89,11 +90,14 @@ $(document).ready(function () {
   function loadEvents() {
     // retrieve events and convert to object
     allEvents = JSON.parse(localStorage.getItem("schedule"));
-    for (i = 0; i < allEvents.length; i++) {
-      // find the textarea associated with the time
-      var eventBlock = $("#" + allEvents[i].time + "> textarea");
-      // populate the event in the text area
-      eventBlock.html(allEvents[i].event);
+
+    if (allEvents !== null) {
+      for (i = 0; i < allEvents.length; i++) {
+        // find the textarea associated with the time
+        var eventBlock = $("#" + allEvents[i].time + "> textarea");
+        // populate the event in the text area
+        eventBlock.html(allEvents[i].event);
+      }
     }
   }
 
