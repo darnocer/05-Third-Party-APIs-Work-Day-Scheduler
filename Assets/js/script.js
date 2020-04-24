@@ -18,6 +18,9 @@ $(document).ready(function () {
     "7PM",
   ];
 
+  var textArea;
+  var timeID;
+
   function renderTimeblocks() {
     for (i = 0; i < timeslots.length; i++) {
       var timeslotText = $("<p>");
@@ -47,26 +50,42 @@ $(document).ready(function () {
       }
     }
   }
+  var allEvents;
 
-  function saveEvent() {}
+  function saveEvent() {
+    var eventDetails = {
+      time: timeID,
+      event: textArea,
+    };
 
-  // // function save local storage
-  // //set item key time
-  // // json stringify
+    console.log(eventDetails);
+    localStorage.setItem("storedEvent", JSON.stringify(eventDetails));
 
-  // var event = localStorage.getItem("time");
+    // var allEvents = localStorage.getItem("storedEvent");
 
-  // if (event == null) {
-  //   localStorage.setItem("time", JSON.stringify(textareatext));
-  // } else {
-  //   time = JSON.parse(event);
-  //   time.push(event);
-  //   localStorage.setItem("time", JSON.stringify(time));
-  // }
+    // if (allEvents === null) {
+    //   localStorage.setItem("storedEvent", JSON.stringify(eventDetails));
+    // } else {
+    //   storedEvent = JSON.parse(allEvents);
+    //   storedEvent.push(eventDetails);
+    //   localStorage.setItem("storedEvent", JSON.stringify(storedEvent));
+    // }
+    // console.log(allEvents);
+  }
 
+  function loadEvents() {
+    allEvents = JSON.parse(localStorage.getItem("storedEvent"));
+    console.log(allEvents.time);
+    console.log(allEvents.event);
+
+    var eventBlock = $("#" + allEvents.time + "> textarea");
+    console.log(eventBlock);
+
+    eventBlock.html(allEvents.event);
+  }
+
+  loadEvents();
   renderTimeblocks();
-  var textArea;
-  var timeID;
 
   let buttons = $(".saveBtn");
   for (var i = 0; i < buttons.length; i++) {
