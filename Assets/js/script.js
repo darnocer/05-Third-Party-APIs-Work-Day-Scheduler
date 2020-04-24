@@ -21,6 +21,7 @@ $(document).ready(function () {
   var textArea;
   var timeID;
 
+  // populates times for each time block
   function renderTimeblocks() {
     for (i = 0; i < timeslots.length; i++) {
       var timeslotText = $("<p>");
@@ -34,6 +35,7 @@ $(document).ready(function () {
     renderColorCode();
   }
 
+  // adds classes to change color
   function renderColorCode() {
     var currentHour = moment().format("hA");
     console.log("current hour: " + currentHour);
@@ -50,52 +52,63 @@ $(document).ready(function () {
       }
     }
   }
-  var allEvents;
 
+  var allEvents = [];
+
+  // saves events in localstorage corresponding to time blocks
   function saveEvent() {
+    var replaced = false;
+
+    // based on user button click
     var eventDetails = {
       time: timeID,
       event: textArea,
     };
 
-    console.log(eventDetails);
-    localStorage.setItem("storedEvent", JSON.stringify(eventDetails));
-
-    // var allEvents = localStorage.getItem("storedEvent");
-
-    // if (allEvents === null) {
-    //   localStorage.setItem("storedEvent", JSON.stringify(eventDetails));
-    // } else {
-    //   storedEvent = JSON.parse(allEvents);
-    //   storedEvent.push(eventDetails);
-    //   localStorage.setItem("storedEvent", JSON.stringify(storedEvent));
-    // }
-    // console.log(allEvents);
+    // if there are no saved events, add event details to the array
+    if (allEvents.length === 0) {
+      allEvents.push(eventDetails);
+    } else {
+      // otherwise, check for existing events with the same time block and replace them
+      for (var i = 0; i < allEvents.length; i++) {
+        if (eventDetails.time === allEvents[i].time) {
+          allEvents.splice(i, 1, eventDetails);
+          replaced = true;
+        }
+      }
+      // if the array already had values but not for the current time block, add event details to the end of array
+      if (!replaced) {
+        allEvents.push(eventDetails);
+      }
+      replaced = false;
+    }
+    // send all of the events to local storage
+    localStorage.setItem("schedule", JSON.stringify(allEvents));
   }
 
   function loadEvents() {
-    allEvents = JSON.parse(localStorage.getItem("storedEvent"));
-    console.log(allEvents.time);
-    console.log(allEvents.event);
-
-    var eventBlock = $("#" + allEvents.time + "> textarea");
-    console.log(eventBlock);
-
-    eventBlock.html(allEvents.event);
+    // retrieve events and convert to object
+    allEvents = JSON.parse(localStorage.getItem("schedule"));
+    for (i = 0; i < allEvents.length; i++) {
+      // find the textarea associated with the time
+      var eventBlock = $("#" + allEvents[i].time + "> textarea");
+      // populate the event in the text area
+      eventBlock.html(allEvents[i].event);
+    }
   }
 
   loadEvents();
   renderTimeblocks();
 
+  // if any of the saveBtns are clicked
   let buttons = $(".saveBtn");
   for (var i = 0; i < buttons.length; i++) {
     buttons[i].addEventListener("click", function () {
       //gets the time id of the row
       timeID = this.parentNode.id;
-      console.log("time ID: " + timeID);
+
       // gets text associated with clicked button
       textArea = this.previousElementSibling.value;
-      console.log("Textarea value: " + textArea);
 
       saveEvent();
     });
