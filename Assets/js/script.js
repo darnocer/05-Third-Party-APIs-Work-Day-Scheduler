@@ -110,10 +110,8 @@ $(document).ready(function () {
     buttons[i].addEventListener("click", function () {
       //gets the time id of the row
       timeID = this.parentNode.id;
-
       // gets text associated with clicked button
       textArea = this.previousElementSibling.value;
-
       saveEvent();
     });
   }
