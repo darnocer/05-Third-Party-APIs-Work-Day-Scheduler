@@ -56,7 +56,6 @@ $(document).ready(function () {
   // saves events in localstorage corresponding to time blocks
   function saveEvent() {
     allEvents = JSON.parse(localStorage.getItem("schedule"));
-    console.log(allEvents);
     var replaced = false;
 
     // based on user button click
@@ -81,7 +80,6 @@ $(document).ready(function () {
       if (!replaced) {
         allEvents.push(eventDetails);
       }
-      replaced = false;
     }
     // send all of the events to local storage
     localStorage.setItem("schedule", JSON.stringify(allEvents));
@@ -91,6 +89,7 @@ $(document).ready(function () {
     // retrieve events and convert to object
     allEvents = JSON.parse(localStorage.getItem("schedule"));
 
+    // load the events if they exist
     if (allEvents !== null) {
       for (i = 0; i < allEvents.length; i++) {
         // find the textarea associated with the time
