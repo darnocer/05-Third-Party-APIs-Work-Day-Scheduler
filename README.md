@@ -1,6 +1,20 @@
 # 05-Third-Party-APIs-Work-Day-Scheduler
 
-We were instructed to create a simple calendar application that allows the user to save events for each hour of the day with the below criteria.
+## Deployed Site
+
+https://darnocer.github.io/Third-Party-APIs-Work-Day-Scheduler/
+
+## Description
+
+This is a simple calendar applciation that allows you to plan your work day by saving events using `localStorage`.
+
+## Usage
+
+- Enter events and appointments in the time blocks and click the blue save button to come back to it later
+- Events will not save if the saved button is not clicked
+- Hours that have already passed appear as grey, the current hour is red, and the remaining hours in the day are green
+
+![day planner demo](./Assets/images/demo.gif)
 
 ## User Story
 
@@ -27,7 +41,3 @@ THEN the text for that event is saved in local storage
 WHEN I refresh the page
 THEN the saved events persist
 ```
-
-The following animation demonstrates the application functionality:
-
-![day planner demo](./Assets/05-third-party-apis-homework-demo.gif)
