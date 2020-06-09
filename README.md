@@ -1,6 +1,6 @@
 # Work Day Scheduler
 
-![last commit](https://img.shields.io/github/last-commit/darnocer/Third-Party-APIs-Work-Day-Scheduler?style=flat-square) ![license badge](https://img.shields.io/github/license/darnocer/Third-Party-APIs-Work-Day-Scheduler?style=flat-square)
+![last commit](https://img.shields.io/github/last-commit/darnocer/Third-Party-APIs-Work-Day-Scheduler?style=flat-square)
 
 ### URL: https://darnocer.github.io/Third-Party-APIs-Work-Day-Scheduler/
 
