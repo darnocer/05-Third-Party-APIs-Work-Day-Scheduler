@@ -11,7 +11,7 @@ This is a simple calendar applciation that utilizes `localStorage` to save your 
 ## Usage
 
 - Enter events and appointments in the time blocks
-- Click the blue save button to save the event to `localStorage` and come back to it later
+- Click the save button to save the event to `localStorage` and come back to it later
 
 ![day planner demo](./Assets/images/demo.gif)
 
@@ -20,7 +20,7 @@ This is a simple calendar applciation that utilizes `localStorage` to save your 
 - Events will not save if the save button is not clicked
 - Hours that have already passed appear as grey
 - The current hour is red
-- The remaining hours in the day are green
+- The remaining hours in the day are greenish
 
 ## Questions?
 
